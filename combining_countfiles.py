@@ -12,12 +12,12 @@ import re
 #this block of code will parse through all of the files provided, and store the information into a dictionary of lists.
 #the key containing the gene names is 'gene_names'
 #the key containing num_reads will be the name of the input file that the reads came from with a number after it.
-num_reads_list = []
 file_number = 0
 mydict = {}
 with open('combined_counts.txt', 'w') as outputfile:
 	for files in sys.argv[1:]:
 		file_number+=1
+		num_reads_list = []
 		gene_name_list = []
 		with open(files, 'r') as inputfile:
 			for line in inputfile:
@@ -27,7 +27,7 @@ with open('combined_counts.txt', 'w') as outputfile:
 					gene_name_list.append(line_list[0])
 					num_reads_list.append(line_list[1])
 		mydict['gene_names'] = gene_name_list
-		mydict[files+str(file_number)] = num_reads_list
+		mydict[files] = num_reads_list
 
 #the following block will take the information stored in the dictionary
 #and then write them out into the output file.
