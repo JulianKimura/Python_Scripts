@@ -9,7 +9,7 @@ for gene_list in sys.argv[1:]:
 #metadata is the original metadatafile with all info
 #juv_data is the juvenile metadata file with the clustering I want to maintain
 #first, I am creating a dictionary where I store all the data in the metadata
-	with open(gene_list, 'r') as metadata, open("TF_accession_numbers.txt", 'r') as juv_data, open("outputfile.txt", 'w') as outputfile:
+	with open(gene_list, 'r') as metadata, open("TF_accession_numbers.txt", 'r') as juv_data, open('TF_'+gene_list, 'w') as outputfile:
 		cell_list = []
 		mydict = {}
 		for line in metadata:
@@ -25,14 +25,9 @@ for gene_list in sys.argv[1:]:
 #replaced by the item.
 		for item in juv_data:
 			item = item.rstrip()
-			item = item.split('\t')
 			for key in mydict:
-				if key in item:
-					mydict[key] = item
-
-#now we are writing ebverything to an output file
-		for key in mydict:
-			outputfile.write('\t'.join(mydict[key])+'\n')
+				if item in key:
+					outputfile.write('\t'.join(mydict[key])+'\n')
 
 
 
